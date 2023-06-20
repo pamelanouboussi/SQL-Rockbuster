@@ -1,0 +1,22 @@
+## Querry to find out how man customers per country. 
+"WITH top_cities AS
+(
+  SELECT
+    country.country_id,
+    country.country,
+    city.city_id,
+    city.city,
+    COUNT(customer.customer_id) AS cust_count
+  FROM customer
+  INNER JOIN address ON customer.address_id = address.address_id
+  INNER JOIN city ON address.city_id = city.city_id
+  INNER JOIN country ON city.country_id = country.country_id
+  GROUP BY
+    country.country_id,
+    country.country,
+    city.city_id,
+    city.city
+  ORDER BY cust_count DESC
+)
+SELECT *
+FROM top_cities;"
