@@ -1,0 +1,11 @@
+"SELECT 	
+	country.country,
+	city.city,
+	count(customer.customer_id) as customer_city
+FROM customer	
+INNER JOIN address on customer.address_id = address.address_id	
+INNER JOIN city on address.city_id = city.city_id	
+INNER JOIN country on city.country_id = country.country_id	
+GROUP BY country.country,	
+	city.city
+ORDER BY customer_city desc	"
